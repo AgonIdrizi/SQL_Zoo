@@ -1,5 +1,5 @@
 # SQL_Zoo
-I've compiled the solutions to all of all 10 levels on the [SQLZOO Tutoral](http://sqlzoo.net/wiki/SQL_Tutorial)
+I've compiled the solutions to all of all  levels on the [SQLZOO Tutoral](http://sqlzoo.net/wiki/SQL_Tutorial)
 
 ## Sections: 
 1. [SELECT from WORLD](#select-from-world)
