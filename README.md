@@ -12,7 +12,7 @@ I've compiled the solutions to all of all 10 levels on the [SQLZOO Tutoral](http
 9. [Self JOIN](#self-join)
 
 
-##SELECT from WORLD
+## SELECT from WORLD
 
 1.
 ```sql
@@ -82,7 +82,7 @@ SELECT name
 WHERE name LIKE '%a%' and name LIKE '%e%' and name LIKE '%i%' and name LIKE '%o%' and name LIKE '%u%'
   AND name NOT LIKE '% %'
 ```
-SELECT FROM NOBEL
+## SELECT from NOBEL
 
 1.
 ```sql
@@ -167,7 +167,7 @@ subject, winner
 ```
 
 
-SELECT WITHIN SELECT
+## SELECT in SELECT
 
 1.
 ```sql
@@ -247,7 +247,7 @@ WHERE x.population/3 > ALL (
   WHERE x.continent = y.continent
   AND x.name != y.name);
 ```
-SUM_and_COUNT
+## SUM and COUNT
 
 1.
 ```sql
@@ -291,7 +291,7 @@ GROUP BY continent
 HAVING SUM(population)>100000000
 ```
 
-The_JOIN_operation
+## JOIN
 
 1.
 ```sql
@@ -380,7 +380,7 @@ ON game.id = goal.matchid
 where(teamid='GER')
 GROUP BY goal.matchid
 ```
-More_JOIN_operations
+## More JOIN
 
 1.
 ```sql
@@ -496,7 +496,7 @@ WHERE movieid IN (SELECT movieid FROM casting JOIN actor ON (actorid=id AND name
 GROUP BY name
 ```
 
-USING_NULL
+## Using NULL
 
 1.
 ```sql
@@ -551,4 +551,81 @@ THEN 'Sci'
 ELSE 'Art' END
 FROM teacher
 ```
-
+## Self JOIN
+1.
+```sql
+SELECT DISTINCT COUNT(*) FROM stops
+```
+2.
+```sql
+SELECT id FROM stops
+  WHERE name = 'Craiglockhart'
+```
+3.
+```sql
+SELECT id, name FROM stops JOIN route ON (stops.id = route.stop)
+  WHERE num = 4
+```
+4.
+```sql
+SELECT company, num, COUNT(*)
+FROM route WHERE stop=149 OR stop=53
+GROUP BY company, num
+HAVING COUNT(*) = 2
+```
+5.
+```sql
+SELECT a.company, a.num, a.stop, b.stop
+FROM route a JOIN route b ON
+  (a.company=b.company AND a.num=b.num)
+WHERE a.stop=53 AND b.stop = (SELECT id FROM stops WHERE name = 'London Road')
+```
+6.
+```sql
+SELECT a.company, a.num, stopa.name, stopb.name
+FROM route a JOIN route b ON
+  (a.company=b.company AND a.num=b.num)
+  JOIN stops stopa ON (a.stop=stopa.id)
+  JOIN stops stopb ON (b.stop=stopb.id)
+WHERE stopa.name='Craiglockhart' and stopb.name = 'London Road'
+```
+7.
+```sql
+SELECT a.company, a.num  
+FROM route a, route b
+WHERE a.num = b.num AND (a.stop = 115 AND b.stop = 137)
+GROUP BY num;
+```
+8.
+```sql
+SELECT a.company, a.num
+FROM route a
+JOIN route b ON (a.company = b.company AND a.num = b.num)
+JOIN stops stopa ON a.stop = stopa.id
+JOIN stops stopb ON b.stop = stopb.id
+WHERE stopa.name = 'Craiglockhart'
+AND stopb.name = 'Tollcross';
+```
+9.
+```sql
+SELECT DISTINCT name, a.company, a.num
+FROM route a
+JOIN route b ON (a.company = b.company AND a.num = b.num)
+JOIN stops ON a.stop = stops.id
+WHERE b.stop = 53;
+```
+10.
+```sql
+SELECT a.num, a.company, stopb.name, c.num, c.company
+FROM route a
+JOIN route b ON (a.company = b.company AND a.num = b.num)
+JOIN (route c JOIN route d ON (c.company = d.company AND c.num = d.num))
+JOIN stops stopa ON a.stop = stopa.id
+JOIN stops stopb ON b.stop = stopb.id
+JOIN stops stopc ON c.stop = stopc.id
+JOIN stops stopd ON d.stop = stopd.id
+WHERE stopa.name = 'Craiglockhart'
+	AND stopd.name = 'Sighthill'
+	AND stopb.name = stopc.name
+ORDER BY LENGTH(a.num), b.num, stopb.name, LENGTH(c.num), d.num;
+```
