@@ -2,14 +2,14 @@
 I've compiled the solutions to all of all 10 levels on the [SQLZOO Tutoral](http://sqlzoo.net/wiki/SQL_Tutorial)
 
 ## Sections: 
- [SELECT from WORLD](#select-from-world)
- [SELECT from NOBEL](#select-from-nobel)
- [SELECT in SELECT](#select-in-select)
- [SUM and COUNT](#sum-and-count)
- [JOIN](#join)
- [More JOIN](#more-join)
- [Using NULL](#using-null)
- [Self JOIN](#self-join)
+1. [SELECT from WORLD](#select-from-world)
+2. [SELECT from NOBEL](#select-from-nobel)
+3. [SELECT in SELECT](#select-in-select)
+4. [SUM and COUNT](#sum-and-count)
+6. [JOIN](#join)
+7. [More JOIN](#more-join)
+8. [Using NULL](#using-null)
+9. [Self JOIN](#self-join)
 
 
 ##SELECT from WORLD
